@@ -1,0 +1,135 @@
+<!-- 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример всех основных HTML-тегов</title>
+    <style>
+        /* Простые стили для наглядности */
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        header, footer { background: #f0f0f0; padding: 15px; text-align: center; }
+        nav { background: #333; padding: 10px; }
+        nav a { color: white; margin: 0 10px; text-decoration: none; }
+        section { border: 1px solid #ddd; padding: 15px; margin: 10px 0; }
+        table { border-collapse: collapse; width: 100%; }
+        td, th { border: 1px solid #ddd; padding: 8px; }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <h1>Мой сайт</h1>
+        <p>Добро пожаловать!</p>
+    </header>
+
+    <!-- Навигационное меню -->
+    <nav>
+        <a href="#home">Главная</a>
+        <a href="#about">О нас</a>
+        <a href="#contact">Контакты</a>
+    </nav>
+
+    <!-- Основное содержимое -->
+    <main>
+        <!-- Секция 1 -->
+        <section id="home">
+            <h2>Главная</h2>
+            <p>Это <span style="color: red;">пример</span> текста в абзаце.</p>
+            <p>Еще один абзац с <br> переносом строки.</p>
+            <hr>
+        </section>
+
+        <!-- Секция 2 -->
+        <section id="about">
+            <h2>О нас</h2>
+            
+            <!-- Списки -->
+            <h3>Наши преимущества:</h3>
+            <ul>
+                <li>Качество</li>
+                <li>Надежность</li>
+                <li>Скорость</li>
+            </ul>
+            
+            <h3>Рейтинг:</h3>
+            <ol>
+                <li>Первое место</li>
+                <li>Второе место</li>
+            </ol>
+            
+            <!-- Изображение -->
+            <img src="https://via.placeholder.com/150" alt="Пример изображения">
+        </section>
+
+        <!-- Секция 3 -->
+        <section id="contact">
+            <h2>Контакты</h2>
+            
+            <!-- Форма -->
+            <form>
+                <label for="name">Имя:</label>
+                <input type="text" id="name" placeholder="Введите имя"><br><br>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email"><br><br>
+                
+                <label for="message">Сообщение:</label>
+                <textarea id="message" rows="4"></textarea><br><br>
+                
+                <label for="country">Страна:</label>
+                <select id="country">
+                    <option value="ru">Россия</option>
+                    <option value="us">США</option>
+                </select><br><br>
+                
+                <button type="submit">Отправить</button>
+            </form>
+            
+            <!-- Таблица -->
+            <h3>График работы:</h3>
+            <table>
+                <tr>
+                    <th>День</th>
+                    <th>Часы</th>
+                </tr>
+                <tr>
+                    <td>Пн-Пт</td>
+                    <td>9:00-18:00</td>
+                </tr>
+                <tr>
+                    <td>Сб-Вс</td>
+                    <td>10:00-16:00</td>
+                </tr>
+            </table>
+        </section>
+    </main>
+
+    <!-- Боковая панель -->
+    <aside>
+        <h3>Реклама</h3>
+        <p>Здесь может быть ваша реклама</p>
+    </aside>
+
+    <!-- Подвал -->
+    <footer>
+        <p>© 2025 Мой сайт. Все права защищены.</p>
+        <audio controls>
+            <source src="sound.mp3" type="audio/mpeg">
+            Ваш браузер не поддерживает аудио.
+        </audio>
+    </footer>
+
+    <!-- Видео -->
+    <video width="320" height="240" controls>
+        <source src="movie.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+    </video>
+    <!-- JavaScript -->
+    <script>
+        document.querySelector('button').addEventListener('click', function() {
+            alert('Форма отправлена! (Это тестовое сообщение)');
+        });
+    </script>
+</body>
+</html> -->

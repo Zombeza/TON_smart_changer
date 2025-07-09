@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Сделка с пользователем</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header id="username-header">Загрузка...</header>
+
+    <div class="container">
+
+        <div class="column">
+            <h3 id="receive_id" class="nick_name">Вы отдаёте</h3>
+            <img src="/Users/macbook/Desktop/Papka/Durov.jpg" class="avatar">
+            <div class="column_block" id="your-resources">
+                <div class="values">
+                    <label class="resource-item"><input type="checkbox" value="Золото"> Золото</label>
+                    <label class="resource-item"><input type="checkbox" value="Серебро"> Серебро</label>
+                    <label class="resource-item"><input type="checkbox" value="Алмазы"> Алмазы</label>
+                </div>
+                    <button class="add_value_btn" onclick="addNewResource('user-resources')">+</button>
+            </div>
+        </div>
+
+        <div class="loader" id="loader"></div>
+
+        <div class="column">
+            <h3 id="give_id" class="nick_name">Вы получаете</h3>
+            <img src="Mark.jpg" class="avatar">
+            <div class="column_block" id="user-resources">
+                <div class="values">
+                <label class="resource-item"><input type="checkbox" value="Нефть"> Нефть</label>
+                <label class="resource-item"><input type="checkbox" value="Платина"> Платина</label>
+                <label class="resource-item"><input type="checkbox" value="Уран"> Уран</label>
+                </div>
+                <button class="add_value_btn" onclick="addNewResource('user-resources')">+</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="actions">
+        <button class="confirm" onclick="confirmTrade()">Подтвердить обмен</button>
+        <button class="cancel" onclick="cancelTrade()">Отменить</button>
+    </div>
+
+    <div class="status" id="status"></div>
+
+    <script>
+        // Отображение username из URL
+        const params = new URLSearchParams(window.location.search);
+        const username = params.get('username');
+        const header = document.getElementById('username-header');
+        header.textContent = username ? `Обмен с @${username}` : "Пользователь не найден";
+        const receive = document.getElementById("receive_id");
+        receive.textContent = username ? `@${username} получит` : "Пользователь не найден";
+        const give = document.getElementById("give_id");
+        give.textContent = username ? `@${username} отдаёт` : "Пользователь не найден";
+
+        // Получение выбранных ресурсов
+        function getSelected(containerId) {
+            const checkboxes = document.querySelectorAll(`#${containerId} input[type="checkbox"]:checked`);
+            return Array.from(checkboxes).map(cb => cb.value);
+        }
+
+
+
+        // Функция для добавления нового ресурса
+        function addNewResource(containerId) {
+            const container = document.getElementById(containerId);
+            const valuesDiv = container.querySelector('.values');
+            
+            // Создаем input для ввода названия ресурса
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'new-resource-input';
+            input.placeholder = 'Введите название ресурса';
+            
+            // Создаем кнопку подтверждения
+            const confirmBtn = document.createElement('button');
+            confirmBtn.textContent = '✓';
+            confirmBtn.style.marginLeft = '5px';
+            confirmBtn.style.backgroundColor = 'var(--success)';
+            confirmBtn.style.color = 'white';
+            confirmBtn.style.border = 'none';
+            confirmBtn.style.borderRadius = '4px';
+            confirmBtn.style.padding = '5px 10px';
+            confirmBtn.style.cursor = 'pointer';
+            
+            // Создаем контейнер для элементов ввода
+            const inputContainer = document.createElement('div');
+            inputContainer.style.display = 'flex';
+            inputContainer.style.alignItems = 'center';
+            inputContainer.style.margin = '5px 0';
+            inputContainer.appendChild(input);
+            inputContainer.appendChild(confirmBtn);
+            
+            // Добавляем контейнер ввода перед кнопкой "+"
+            const addButton = container.querySelector('.add_value_btn');
+            container.insertBefore(inputContainer, addButton);
+            
+            // Обработчик для кнопки подтверждения
+            confirmBtn.onclick = function() {
+                const resourceName = input.value.trim();
+                if (resourceName) {
+                    // Создаем новый чекбокс
+                    const newItem = document.createElement('label');
+                    newItem.className = 'resource-item';
+                    
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.value = resourceName;
+                    
+                    newItem.appendChild(checkbox);
+                    newItem.appendChild(document.createTextNode(' ' + resourceName));
+                    
+                    // Добавляем новый чекбокс в список
+                    valuesDiv.appendChild(newItem);
+                    
+                    // Удаляем элементы ввода
+                    container.removeChild(inputContainer);
+                }
+            };
+            
+            // Также можно добавить обработчик нажатия Enter
+            input.onkeypress = function(e) {
+                if (e.key === 'Enter') {
+                    confirmBtn.click();
+                }
+            };
+        }
+
+
+
+        function confirmTrade() {
+            const yours = getSelected('your-resources');
+            const theirs = getSelected('user-resources');
+            const status = document.getElementById('status');
+            const loader = document.getElementById('loader');
+
+            if (yours.length === 0 || theirs.length === 0) {
+                status.textContent = "Оба участника должны выбрать ценности!";
+                status.style.color = "var(--error)";
+                return;
+            }
+
+            loader.classList.add("spin");
+            status.textContent = "";
+
+            // Эмуляция задержки обмена
+            setTimeout(() => {
+
+                loader.classList.remove("spin");
+                status.textContent = "Обмен подтверждён! Сделка прошла успешно.";
+                status.style.color = "var(--success)";
+
+                // 🔒 Здесь можно сделать запрос к серверу
+            }, 2000); // Задержка в 2 секунды
+        }
+
+        function cancelTrade() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(cb => cb.checked = false);
+            const status = document.getElementById('status');
+            status.textContent = "Сделка отменена. Ценности возвращены.";
+            status.style.color = "var(--error)";
+        }
+    </script>
+</body>
+
+</html>
